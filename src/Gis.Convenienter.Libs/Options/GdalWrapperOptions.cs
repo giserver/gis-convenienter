@@ -21,5 +21,5 @@ public record ConvertGeoTiff2COGOptions(
     string[] SrcPaths,
     [GdalParameter("-co", "TARGET_SRS")] string TargetSrs,
     [GdalParameter("-co", "BLOCKSIZE")] uint BlockSize,
-    [GdalParameter("-co", "COMPRESS")] string Compress
+    [GdalParameter("-co", "COMPRESS")] COGCompress Compress
 ) : IOptions;

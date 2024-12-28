@@ -9,11 +9,11 @@ internal class GdalWrapper(ILogger<GdalWrapper> logger) : IGdalWrapper
 {
     public Task ConvertGeoTiff2COGAsync(
         ConvertGeoTiff2COGOptions options,
-        IProgress<int>? progressRptr = default,
+        IProgress<int>? progressRptr = null,
         CancellationToken cancellationToken = default
     )
     {
-        var (destName, destDir, srcPaths, _, _, _) = options;
+        var (destName, destDir, srcPaths, _, _, _) = options ?? throw new ArgumentNullException(nameof(options));
 
         if (!Directory.Exists(destDir))
             throw new DirectoryNotFoundException($"结果文件夹不存在: {destDir}");
@@ -26,8 +26,7 @@ internal class GdalWrapper(ILogger<GdalWrapper> logger) : IGdalWrapper
             {
                 foreach (var dataset in srcDatasets)
                 {
-                    dataset.Close();
-                    dataset.Dispose();
+                    dataset.Destroy();
                 }
                 throw new FileNotFoundException("输入文件不存在", srcPath);
             }
@@ -57,14 +56,13 @@ internal class GdalWrapper(ILogger<GdalWrapper> logger) : IGdalWrapper
                         ),
                         (double processing, nint msg, nint data) =>
                         {
-                            progressRptr?.Report((int)(processing * 10000));
+                            progressRptr?.Report((int)(processing * 100));
                             return cancellationToken.IsCancellationRequested ? 0 : 1;
                         },
                         null
                     );
 
-                    destDataSet?.Close();
-                    destDataSet?.Dispose();
+                    destDataSet?.Destroy();
                 }
                 catch (Exception ex)
                 {
@@ -75,8 +73,7 @@ internal class GdalWrapper(ILogger<GdalWrapper> logger) : IGdalWrapper
                 {
                     foreach (var dataset in srcDatasets)
                     {
-                        dataset.Close();
-                        dataset.Dispose();
+                        dataset.Destroy();
                     }
                 }
             },

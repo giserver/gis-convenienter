@@ -7,12 +7,14 @@ namespace Gis.Convenienter.Libs;
 
 public static class Extensions
 {
-    public static IServiceCollection AddLibs(IServiceCollection services)
+    public static IServiceCollection AddLibs(this IServiceCollection services)
     {
-        return services.AddSingleton<IGdalWrapper, GdalWrapper>();
+        return services
+            .AddSingleton<IGdalWrapper, GdalWrapper>()
+            .AddSingleton<IProgress<double>>(new Progress<double>());
     }
 
-    public static void Destory(this Dataset dataset)
+    public static void Destroy(this Dataset dataset)
     {
         dataset.Close();
         dataset.Dispose();

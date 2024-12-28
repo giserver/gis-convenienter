@@ -1,6 +1,4 @@
-﻿using Gis.Convenienter.Libs.Enums;
-
-namespace Gis.Convenienter.Libs.Attributes;
+﻿namespace Gis.Convenienter.Libs.Attributes;
 
 [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property)]
 internal class GdalParameterAttribute(string key, string? name = default) : Attribute

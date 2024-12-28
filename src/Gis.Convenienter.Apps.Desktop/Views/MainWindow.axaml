@@ -7,7 +7,9 @@
         x:Class="Gis.Convenienter.Apps.Desktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Gis.Convenienter.Apps.Desktop">
+		TransparencyLevelHint="AcrylicBlur"
+		Background="Transparent"
+		ExtendClientAreaToDecorationsHint ="True" MinWidth="400" MinHeight="500">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -15,6 +17,26 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<Panel>
+		<ExperimentalAcrylicBorder IsHitTestVisible="False">
+			<ExperimentalAcrylicBorder.Material>
+				<ExperimentalAcrylicMaterial
+					BackgroundSource="Digger"
+					TintColor="Black"
+					TintOpacity="1"
+					MaterialOpacity="0.65" />
+			</ExperimentalAcrylicBorder.Material>
+		</ExperimentalAcrylicBorder>
+		<Grid RowDefinitions="Auto Auto *">
+			<Grid Grid.Row="0" Margin="8" ColumnDefinitions="Auto Auto">
+				<PathIcon  Height="20" Width="20" Data="{StaticResource GisLogo}"></PathIcon>
+				<TextBlock Grid.Column="1" Margin="10 0 0 0" VerticalAlignment="Center">GIS 工具箱</TextBlock>
+			</Grid>
+			
+			<ProgressBar Grid.Row="1" Value="{Binding ProgressValue}" ShowProgressText="True"></ProgressBar>
+			<StackPanel Grid.Row="2">
+			</StackPanel>
+		</Grid>
+	</Panel>
 
 </Window>

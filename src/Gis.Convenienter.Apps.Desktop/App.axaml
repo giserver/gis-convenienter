@@ -11,5 +11,6 @@
   
     <Application.Styles>
         <FluentTheme />
+		<StyleInclude Source="avares://Gis.Convenienter.Apps.Desktop/Styles/Icons.axaml"></StyleInclude>
     </Application.Styles>
 </Application>

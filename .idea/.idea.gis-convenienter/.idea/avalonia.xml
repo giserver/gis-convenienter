@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="src/Gis.Convenienter.Apps.Desktop/App.axaml" value="src/Gis.Convenienter.Apps.Desktop/Gis.Convenienter.Apps.Desktop.csproj" />
+        <entry key="src/Gis.Convenienter.Apps.Desktop/Styles/Icons.axaml" value="src/Gis.Convenienter.Apps.Desktop/Gis.Convenienter.Apps.Desktop.csproj" />
+        <entry key="src/Gis.Convenienter.Apps.Desktop/Views/MainWindow.axaml" value="src/Gis.Convenienter.Apps.Desktop/Gis.Convenienter.Apps.Desktop.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
