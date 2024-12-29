@@ -17,7 +17,7 @@
         <converter:StreamGeometryConverter x:Key="StreamGeometryConverter"></converter:StreamGeometryConverter>
     </UserControl.Resources>
 
-    <ItemsControl x:Name="FeatrueTree" ItemsSource="{Binding FeatureLists}">
+    <ItemsControl x:Name="CtrlFeatureTree" ItemsSource="{Binding FeatureLists}">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Expander Width="300">
@@ -29,7 +29,8 @@
                             </TextBlock>
                         </Grid>
                     </Expander.Header>
-                    <ListBox ItemsSource="{Binding FeatureItems}" SelectedItem="{Binding #FeatrueTree.((vm:MainWindowViewModel)DataContext).SelectedFeatureItem}">
+                    <ListBox ItemsSource="{Binding FeatureItems}" SelectedIndex="-1"
+                             SelectedItem="{Binding #CtrlFeatureTree.((vm:MainWindowViewModel)DataContext).SelectedFeatureItem, Mode=OneWayToSource}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>

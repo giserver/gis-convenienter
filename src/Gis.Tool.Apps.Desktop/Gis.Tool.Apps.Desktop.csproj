@@ -31,4 +31,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Gis.Tool.Libs\Gis.Tool.Libs.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\FeatureItems\GeoTiff\GeoTiff2COG.axaml.cs">
+      <DependentUpon>GeoTiff2COG.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

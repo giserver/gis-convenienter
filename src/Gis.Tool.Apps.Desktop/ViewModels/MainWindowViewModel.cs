@@ -18,10 +18,11 @@ namespace Gis.Tool.Apps.Desktop.ViewModels
 
         [ObservableProperty] private List<FeatureList> _featureLists =
         [
-            new FeatureList("0", "GeoTiff", "GeoTiff 数据处理", "FeatureListGrid", []),
+            new FeatureList("0", "GeoTiff", "GeoTiff 数据处理", "FeatureListGeoTiff", []),
+            new FeatureList("1", "GeoJson", "", "FeatureListGeoJson", []),
             new FeatureList("-1", "插件" , "",  "FeatureListPlugin",[])
         ];
-
+        
         [ObservableProperty] private FeatureItemViewModelBase _selectedFeatureItem = null;
 
         [RelayCommand]

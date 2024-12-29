@@ -1,7 +1,4 @@
-﻿using System;
-using Gis.Tool.Apps.Desktop.Attributes;
-using Gis.Tool.Apps.Desktop.Views.FeatureItems;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Gis.Tool.Apps.Desktop.Views.FeatureItems.GeoTiff;
 
 namespace Gis.Tool.Apps.Desktop.ViewModels.FeatureItems;
 
