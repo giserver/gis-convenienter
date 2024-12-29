@@ -22,7 +22,7 @@ namespace Gis.Tool.Apps.Desktop.ViewModels
             new FeatureList("-1", "插件" , "",  "FeatureListPlugin",[])
         ];
 
-        [ObservableProperty] private FeatureItem _selectedFeatureItem = null;
+        [ObservableProperty] private FeatureItemViewModelBase _selectedFeatureItem = null;
 
         [RelayCommand]
         private void ToggleSplitView()

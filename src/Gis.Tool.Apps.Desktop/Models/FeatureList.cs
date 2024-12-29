@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using Avalonia;
-using Avalonia.Media;
-using Avalonia.Media.Imaging;
+using Gis.Tool.Apps.Desktop.ViewModels;
 
 namespace Gis.Tool.Apps.Desktop.Models;
 
-public record FeatureList(string Id, string Title, string Description, string Icon, List<FeatureItem> FeatureItems);
+public record FeatureList(string Id, string Title, string Description, string Icon, List<FeatureItemViewModelBase> FeatureItems);

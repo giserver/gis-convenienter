@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Gis.Tool.Apps.Desktop.Attributes;
 
-[AttributeUsage(AttributeTargets.Class)]
+[AttributeUsage(AttributeTargets.Class, Inherited = true)]
 public class RegisterServiceAttribute (ServiceLifetime lifetime, Type? implementationType = null): Attribute
 {
     public ServiceLifetime Lifetime { get; } = lifetime;

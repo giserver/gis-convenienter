@@ -35,6 +35,8 @@ namespace Gis.Tool.Apps.Desktop
                         var attr = type.GetCustomAttribute<RegisterServiceAttribute>();
                         if (attr != null)
                         {
+                            if(!type.IsPublic || type.IsAbstract || !type.IsClass) continue; 
+                            
                             if (attr.ImplementationType == null)
                             {
                                 _ = attr.Lifetime switch
@@ -110,24 +112,15 @@ namespace Gis.Tool.Apps.Desktop
         private void LoadFeatureItems(MainWindowViewModel vm)
         {
             var types = Assembly.GetExecutingAssembly().GetTypes().ToArray();
-
+            var baseType = typeof(FeatureItemViewModelBase);
+            
             foreach (var type in types)
             {
-                var featureItemAttr = type.GetCustomAttribute<FeatureItemAttribute>();
-                if (featureItemAttr != null && typeof(UserControl).IsAssignableFrom(type))
-                {
-                    var control = (Activator.CreateInstance(type) as UserControl)!;
-                    control.DataContext = ServiceProvider.GetRequiredService(featureItemAttr.ViewModel);
-
-                    var featureItem = new FeatureItem(
-                        featureItemAttr.PId,
-                        featureItemAttr.Title,
-                        featureItemAttr.Description,
-                        featureItemAttr.Icon,
-                        control
-                    );
+                if(!baseType.IsAssignableFrom(type) || type == baseType) continue;
                 
-                    vm.FeatureLists.FirstOrDefault(x=>x.Id == featureItem.PId)?.FeatureItems.Add(featureItem);
+                if (ServiceProvider.GetRequiredService(type) is FeatureItemViewModelBase featureItemViewModel)
+                {
+                    vm.FeatureLists.FirstOrDefault(x=>x.Id == featureItemViewModel.PId)?.FeatureItems.Add(featureItemViewModel);
                 }
             }
         }
