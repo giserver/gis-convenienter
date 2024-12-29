@@ -5,7 +5,15 @@
       <map>
         <entry key="src/Gis.Convenienter.Apps.Desktop/App.axaml" value="src/Gis.Convenienter.Apps.Desktop/Gis.Convenienter.Apps.Desktop.csproj" />
         <entry key="src/Gis.Convenienter.Apps.Desktop/Styles/Icons.axaml" value="src/Gis.Convenienter.Apps.Desktop/Gis.Convenienter.Apps.Desktop.csproj" />
+        <entry key="src/Gis.Convenienter.Apps.Desktop/Views/FeatureTree.axaml" value="src/Gis.Convenienter.Apps.Desktop/Gis.Convenienter.Apps.Desktop.csproj" />
         <entry key="src/Gis.Convenienter.Apps.Desktop/Views/MainWindow.axaml" value="src/Gis.Convenienter.Apps.Desktop/Gis.Convenienter.Apps.Desktop.csproj" />
+        <entry key="src/Gis.Convenienter.Apps.Desktop/Views/TitleBar.axaml" value="src/Gis.Convenienter.Apps.Desktop/Gis.Convenienter.Apps.Desktop.csproj" />
+        <entry key="src/Gis.Tool.Apps.Desktop/App.axaml" value="src/Gis.Tool.Apps.Desktop/Gis.Tool.Apps.Desktop.csproj" />
+        <entry key="src/Gis.Tool.Apps.Desktop/Styles/Icons.axaml" value="src/Gis.Tool.Apps.Desktop/Gis.Tool.Apps.Desktop.csproj" />
+        <entry key="src/Gis.Tool.Apps.Desktop/Views/FeatureItems/GeoTiff2COG.axaml" value="src/Gis.Tool.Apps.Desktop/Gis.Tool.Apps.Desktop.csproj" />
+        <entry key="src/Gis.Tool.Apps.Desktop/Views/FeatureTree.axaml" value="src/Gis.Tool.Apps.Desktop/Gis.Tool.Apps.Desktop.csproj" />
+        <entry key="src/Gis.Tool.Apps.Desktop/Views/MainWindow.axaml" value="src/Gis.Tool.Apps.Desktop/Gis.Tool.Apps.Desktop.csproj" />
+        <entry key="src/Gis.Tool.Apps.Desktop/Views/TitleBar.axaml" value="src/Gis.Tool.Apps.Desktop/Gis.Tool.Apps.Desktop.csproj" />
       </map>
     </option>
   </component>

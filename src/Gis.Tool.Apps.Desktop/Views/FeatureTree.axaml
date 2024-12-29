@@ -1,0 +1,45 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Gis.Tool.Apps.Desktop.ViewModels"
+             xmlns:view="using:Gis.Tool.Apps.Desktop.Views"
+             xmlns:converter="using:Gis.Tool.Apps.Desktop.Converters"
+             x:DataType="vm:MainWindowViewModel"
+             mc:Ignorable="d"
+             x:Class="Gis.Tool.Apps.Desktop.Views.FeatureTree">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <UserControl.Resources>
+        <converter:StreamGeometryConverter x:Key="StreamGeometryConverter"></converter:StreamGeometryConverter>
+    </UserControl.Resources>
+
+    <ItemsControl x:Name="FeatrueTree" ItemsSource="{Binding FeatureLists}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Expander Width="300">
+                    <Expander.Header>
+                        <Grid ColumnDefinitions="Auto,*">
+                            <PathIcon Data="{Binding Icon, Converter={StaticResource StreamGeometryConverter}}"></PathIcon>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Center" Margin="12 0 0 0 "
+                                       Text="{Binding Title}">
+                            </TextBlock>
+                        </Grid>
+                    </Expander.Header>
+                    <ListBox ItemsSource="{Binding FeatureItems}" SelectedItem="{Binding #FeatrueTree.((vm:MainWindowViewModel)DataContext).SelectedFeatureItem}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock Text="{Binding Title}"></TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Expander>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

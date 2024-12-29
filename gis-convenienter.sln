@@ -7,11 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FB2C7B05-D39
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{36D42483-7E30-415A-BDB4-811EDA90895E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gis.Convenienter.Libs", "src\Gis.Convenienter.Libs\Gis.Convenienter.Libs.csproj", "{859C122A-7B82-4B1E-8C17-B4BCCC3D5DE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gis.Tool.Libs", "src\Gis.Tool.Libs\Gis.Tool.Libs.csproj", "{859C122A-7B82-4B1E-8C17-B4BCCC3D5DE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gis.Convenienter.Apps.Desktop", "src\Gis.Convenienter.Apps.Desktop\Gis.Convenienter.Apps.Desktop.csproj", "{64AEF72C-D404-4E6E-8C73-C22ED9D2ECE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gis.Tool.Apps.Desktop", "src\Gis.Tool.Apps.Desktop\Gis.Tool.Apps.Desktop.csproj", "{64AEF72C-D404-4E6E-8C73-C22ED9D2ECE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gis.Convenienter.Apps.Cmd", "src\Gis.Convenienter.Apps.Cmd\Gis.Convenienter.Apps.Cmd.csproj", "{337A2BD0-3F82-40F5-B07F-BDAD27687F91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gis.Tool.Apps.Cmd", "src\Gis.Tool.Apps.Cmd\Gis.Tool.Apps.Cmd.csproj", "{337A2BD0-3F82-40F5-B07F-BDAD27687F91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
