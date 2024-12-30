@@ -18,7 +18,15 @@
     </UserControl.Resources>
     
    <StackPanel>
-       <!-- <ItemsControl ></ItemsControl> -->
+       <ListBox ItemsSource="{Binding FixFeatureItems}" SelectedItem="{Binding SelectedFixFeatureItem}">
+           <ListBox.ItemTemplate>
+               <DataTemplate>
+                   <Grid>
+                       <TextBlock Text="{Binding Title}"></TextBlock>
+                   </Grid>
+               </DataTemplate>
+           </ListBox.ItemTemplate>
+       </ListBox>
        <ItemsControl ItemsSource="{Binding FeatureLists}">
            <ItemsControl.ItemTemplate>
                <DataTemplate>

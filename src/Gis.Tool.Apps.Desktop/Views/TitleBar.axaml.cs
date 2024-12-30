@@ -12,9 +12,4 @@ public partial class TitleBar : UserControl
     {
         InitializeComponent();
     }
-
-    private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
-    {
-        (DataContext as MainWindowViewModel)!.BackToHomePageCommand.Execute(sender);
-    }
 }

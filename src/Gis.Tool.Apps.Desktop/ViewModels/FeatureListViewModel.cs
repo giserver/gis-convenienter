@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using Gis.Tool.Apps.Desktop.Abstractions;
 using Gis.Tool.Apps.Desktop.Messages;
+using Gis.Tool.Apps.Desktop.ViewModels.FeatureItems;
 
 namespace Gis.Tool.Apps.Desktop.ViewModels;
 
 /// <summary>
 /// 功能列表
 /// </summary>
-public partial class FeatureListViewModel : ViewModelBase
+public partial class FeatureListViewModel : ViewModelBase, IFeatureList<IFeatureItem>
 {
     public FeatureListViewModel()
     {
@@ -27,11 +29,11 @@ public partial class FeatureListViewModel : ViewModelBase
 
     public required string Icon { get; init; }
 
-    public List<FeatureItemViewModelBase> FeatureItems { get; } = [];
+    public List<IFeatureItem> FeatureItems { get; } = [];
 
-    [ObservableProperty] public partial FeatureItemViewModelBase? SelectedFeatureItem { get; set; }
+    [ObservableProperty] public partial RunnerFeatureItemViewModelBase? SelectedFeatureItem { get; set; }
 
-    partial void OnSelectedFeatureItemChanged(FeatureItemViewModelBase? value)
+    partial void OnSelectedFeatureItemChanged(RunnerFeatureItemViewModelBase? value)
     {
         if (value != null)
             WeakReferenceMessenger.Default.Send(new SelectFeatureItemChangedMessage(value));

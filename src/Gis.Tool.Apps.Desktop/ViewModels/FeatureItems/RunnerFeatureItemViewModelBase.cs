@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.Input;
-using Gis.Tool.Apps.Desktop.Attributes;
+using Gis.Tool.Apps.Desktop.Abstractions;
 using Gis.Tool.Apps.Desktop.Models;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Gis.Tool.Apps.Desktop.ViewModels;
+namespace Gis.Tool.Apps.Desktop.ViewModels.FeatureItems;
 
-public abstract class FeatureItemViewModelBase(
+public abstract class RunnerFeatureItemViewModelBase(
     string pId,
     string title,
     string description,
     Type userControlType
-) : ViewModelBase
+) : ViewModelBase, IRunnerFeatureItem
 {
     public string PId { get; } = pId;
 
@@ -24,7 +22,8 @@ public abstract class FeatureItemViewModelBase(
     public string Description { get; } = description;
     public Type UserControlType { get; } = userControlType;
 
-    public UserControl Control
+    [field: AllowNull, MaybeNull]
+    public UserControl View
     {
         get
         {

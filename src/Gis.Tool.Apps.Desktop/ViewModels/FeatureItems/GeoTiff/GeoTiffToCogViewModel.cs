@@ -7,10 +7,10 @@ using Gis.Tool.Apps.Desktop.Views.FeatureItems.GeoTiff;
 using Gis.Tool.Libs.Abstractions;
 using Gis.Tool.Libs.Options;
 
-namespace Gis.Tool.Apps.Desktop.ViewModels.FeatureItems;
+namespace Gis.Tool.Apps.Desktop.ViewModels.FeatureItems.GeoJson;
 
 public partial class GeoTiffToCogViewModel()
-    : FeatureItemViewModelBase("0", "GeoTiff to Cog", "GeoTiff to Cog", typeof(GeoTiff2Cog))
+    : RunnerFeatureItemViewModelBase("0", "GeoTiff to Cog", "GeoTiff to Cog", typeof(GeoTiff2Cog))
 {
     [ObservableProperty] public partial string DestPath { get; set; }
 

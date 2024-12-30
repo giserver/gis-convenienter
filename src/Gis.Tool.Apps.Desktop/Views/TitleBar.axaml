@@ -11,7 +11,7 @@
             <PathIcon Height="14" Width="14" Data="{StaticResource Menu}"></PathIcon>
         </Button>
         
-        <StackPanel Orientation="Horizontal" PointerPressed="InputElement_OnPointerPressed">
+        <StackPanel Orientation="Horizontal">
             <PathIcon Data="{StaticResource GisLogo}"></PathIcon>
             <TextBlock Margin="6 0 0 0" VerticalAlignment="Center">GIS工具箱</TextBlock>
         </StackPanel>
