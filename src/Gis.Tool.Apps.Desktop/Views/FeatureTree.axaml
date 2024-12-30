@@ -16,31 +16,34 @@
     <UserControl.Resources>
         <converter:StreamGeometryConverter x:Key="StreamGeometryConverter"></converter:StreamGeometryConverter>
     </UserControl.Resources>
-
-    <ItemsControl x:Name="CtrlFeatureTree" ItemsSource="{Binding FeatureLists}">
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Expander Width="300">
-                    <Expander.Header>
-                        <Grid ColumnDefinitions="Auto,*">
-                            <PathIcon Data="{Binding Icon, Converter={StaticResource StreamGeometryConverter}}"></PathIcon>
-                            <TextBlock Grid.Column="1" VerticalAlignment="Center" Margin="12 0 0 0 "
-                                       Text="{Binding Title}">
-                            </TextBlock>
-                        </Grid>
-                    </Expander.Header>
-                    <ListBox ItemsSource="{Binding FeatureItems}" SelectedIndex="-1"
-                             SelectedItem="{Binding #CtrlFeatureTree.((vm:MainWindowViewModel)DataContext).SelectedFeatureItem, Mode=OneWayToSource}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <TextBlock Text="{Binding Title}"></TextBlock>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Expander>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
+    
+   <StackPanel>
+       <!-- <ItemsControl ></ItemsControl> -->
+       <ItemsControl ItemsSource="{Binding FeatureLists}">
+           <ItemsControl.ItemTemplate>
+               <DataTemplate>
+                   <Expander Width="300">
+                       <Expander.Header>
+                           <Grid ColumnDefinitions="Auto,*">
+                               <PathIcon Data="{Binding Icon, Converter={StaticResource StreamGeometryConverter}}"></PathIcon>
+                               <TextBlock Grid.Column="1" VerticalAlignment="Center" Margin="12 0 0 0 "
+                                          Text="{Binding Title}">
+                               </TextBlock>
+                           </Grid>
+                       </Expander.Header>
+                       <ListBox ItemsSource="{Binding FeatureItems}"
+                                SelectedItem="{Binding SelectedFeatureItem, Mode=TwoWay}">
+                           <ListBox.ItemTemplate>
+                               <DataTemplate>
+                                   <Grid>
+                                       <TextBlock Text="{Binding Title}"></TextBlock>
+                                   </Grid>
+                               </DataTemplate>
+                           </ListBox.ItemTemplate>
+                       </ListBox>
+                   </Expander>
+               </DataTemplate>
+           </ItemsControl.ItemTemplate>
+       </ItemsControl>
+   </StackPanel>
 </UserControl>

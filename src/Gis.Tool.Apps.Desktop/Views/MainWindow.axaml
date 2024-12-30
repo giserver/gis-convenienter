@@ -26,9 +26,9 @@
                 <SplitView.Pane>
                    <views:FeatureTree></views:FeatureTree>
                 </SplitView.Pane>
-                <Panel Margin="8">
-                    <ContentControl Content="{Binding SelectedFeatureItem.Control}"></ContentControl>
-                </Panel>
+                    <Panel Margin="16 0 16 12 ">
+                        <ContentControl Background="{DynamicResource ThemeBackgroundColor}" Content="{Binding SelectedFeatureItemControl}"></ContentControl>
+                    </Panel>
             </SplitView>
         </Grid>
     </Panel>

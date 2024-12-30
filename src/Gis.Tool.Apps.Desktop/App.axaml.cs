@@ -1,13 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Gis.Tool.Apps.Desktop.Attributes;
-using Gis.Tool.Apps.Desktop.Models;
 using Gis.Tool.Apps.Desktop.ViewModels;
 using Gis.Tool.Apps.Desktop.Views;
 using Gis.Tool.Libs;
@@ -18,25 +17,27 @@ namespace Gis.Tool.Apps.Desktop
 {
     public sealed partial class App : Application
     {
-        private IServiceProvider? _serviceProvider;
-
         public IServiceProvider ServiceProvider
         {
             get
             {
-                if (_serviceProvider == null)
+                if (field == null)
                 {
                     var services = new ServiceCollection();
                     services.AddLibs();
-                    
+
                     var types = GetType().Assembly.GetTypes().ToArray();
                     foreach (var type in types)
                     {
                         var attr = type.GetCustomAttribute<RegisterServiceAttribute>();
+                        var unAttr = type.GetCustomAttribute<UnRegisterServcieAttribute>();
+                        if(unAttr != null) continue;
+                        
                         if (attr != null)
                         {
-                            if(!type.IsPublic || type.IsAbstract || !type.IsClass) continue; 
-                            
+                            if (type.IsAbstract || !type.IsClass)
+                                continue;
+
                             if (attr.ImplementationType == null)
                             {
                                 _ = attr.Lifetime switch
@@ -44,35 +45,46 @@ namespace Gis.Tool.Apps.Desktop
                                     ServiceLifetime.Scoped => services.AddScoped(type),
                                     ServiceLifetime.Singleton => services.AddSingleton(type),
                                     ServiceLifetime.Transient => services.AddTransient(type),
-                                    _ => throw new ArgumentOutOfRangeException()
+                                    _ => throw new ArgumentOutOfRangeException(),
                                 };
                             }
                             else
                             {
                                 _ = attr.Lifetime switch
                                 {
-                                    ServiceLifetime.Scoped => services.AddScoped(type,attr.ImplementationType),
-                                    ServiceLifetime.Singleton => services.AddSingleton(type, attr.ImplementationType),
-                                    ServiceLifetime.Transient => services.AddTransient(type, attr.ImplementationType),
-                                    _ => throw new ArgumentOutOfRangeException()
+                                    ServiceLifetime.Scoped => services.AddScoped(
+                                        type,
+                                        attr.ImplementationType
+                                    ),
+                                    ServiceLifetime.Singleton => services.AddSingleton(
+                                        type,
+                                        attr.ImplementationType
+                                    ),
+                                    ServiceLifetime.Transient => services.AddTransient(
+                                        type,
+                                        attr.ImplementationType
+                                    ),
+                                    _ => throw new ArgumentOutOfRangeException(),
                                 };
                             }
                         }
                     }
-                    
-                    Log.Logger = new LoggerConfiguration().WriteTo.Async(c =>
-                    {
-                        c.File("gis-tool.log");
-                    }).CreateLogger();
+
+                    Log.Logger = new LoggerConfiguration()
+                        .WriteTo.Async(c =>
+                        {
+                            c.File("gis-tool.log");
+                        })
+                        .CreateLogger();
                     services.AddLogging(builder =>
                     {
-                        builder.AddSerilog(Log.Logger,  true);
+                        builder.AddSerilog(Log.Logger, true);
                     });
-                    
-                    _serviceProvider = services.BuildServiceProvider();
+
+                    field = services.BuildServiceProvider();
                 }
 
-                return _serviceProvider;
+                return field;
             }
         }
 
@@ -88,16 +100,13 @@ namespace Gis.Tool.Apps.Desktop
             BindingPlugins.DataValidators.RemoveAt(0);
 
             var vm = ServiceProvider.GetRequiredService<MainWindowViewModel>();
-            
+
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 // Line below is needed to remove Avalonia data validation.
                 // Without this line you will get duplicate validations from both Avalonia and CT
                 BindingPlugins.DataValidators.RemoveAt(0);
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = vm,
-                };
+                desktop.MainWindow = new MainWindow { DataContext = vm };
                 LoadFeatureItems(vm);
 
                 desktop.Exit += (_, __) =>
@@ -113,14 +122,19 @@ namespace Gis.Tool.Apps.Desktop
         {
             var types = Assembly.GetExecutingAssembly().GetTypes().ToArray();
             var baseType = typeof(FeatureItemViewModelBase);
-            
+
             foreach (var type in types)
             {
-                if(!baseType.IsAssignableFrom(type) || type == baseType) continue;
-                
-                if (ServiceProvider.GetRequiredService(type) is FeatureItemViewModelBase featureItemViewModel)
+                if (!baseType.IsAssignableFrom(type) || type == baseType)
+                    continue;
+
+                if (
+                    ServiceProvider.GetRequiredService(type)
+                    is FeatureItemViewModelBase featureItemViewModel
+                )
                 {
-                    vm.FeatureLists.FirstOrDefault(x=>x.Id == featureItemViewModel.PId)?.FeatureItems.Add(featureItemViewModel);
+                    vm.FeatureLists.FirstOrDefault(x => x.Id == featureItemViewModel.PId)
+                        ?.FeatureItems.Add(featureItemViewModel);
                 }
             }
         }

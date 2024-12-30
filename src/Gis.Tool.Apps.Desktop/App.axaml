@@ -3,14 +3,30 @@
              x:Class="Gis.Tool.Apps.Desktop.App"
              xmlns:local="using:Gis.Tool.Apps.Desktop"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <local:ViewLocator />
     </Application.DataTemplates>
-  
+
     <Application.Styles>
         <FluentTheme />
-		<StyleInclude Source="avares://Gis.Tool.Apps.Desktop/Styles/Icons.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Gis.Tool.Apps.Desktop/Styles/Icons.axaml"></StyleInclude>
     </Application.Styles>
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="ThemeBackgroundColor">#272727</SolidColorBrush>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="ThemeBackgroundColor">#e3e3e3</SolidColorBrush>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="ThemeBackgroundColor">#272727</SolidColorBrush>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>
