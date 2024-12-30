@@ -7,7 +7,7 @@ using Gis.Tool.Apps.Desktop.Views.FeatureItems.GeoTiff;
 using Gis.Tool.Libs.Abstractions;
 using Gis.Tool.Libs.Options;
 
-namespace Gis.Tool.Apps.Desktop.ViewModels.FeatureItems.GeoJson;
+namespace Gis.Tool.Apps.Desktop.ViewModels.FeatureItems.GeoTiff;
 
 public partial class GeoTiffToCogViewModel()
     : RunnerFeatureItemViewModelBase("0", "GeoTiff to Cog", "GeoTiff to Cog", typeof(GeoTiff2Cog))

@@ -64,7 +64,7 @@ public partial class MainWindowViewModel : ViewModelBase
     ];
 
    
-    [ObservableProperty] public partial UserControl SelectedFeatureItemControl { get; set; }
+    [ObservableProperty] public partial Control SelectedFeatureItemControl { get; set; }
     
     [ObservableProperty] public partial FixFeatureItemViewModel? SelectedFixFeatureItem { get; set; }
 

@@ -10,5 +10,5 @@ public class FixFeatureItemViewModel(string title, string description, UserContr
 
     public string Description { get; } = description;
 
-    public UserControl View { get; } = view;
+    public Control View { get; } = view;
 }

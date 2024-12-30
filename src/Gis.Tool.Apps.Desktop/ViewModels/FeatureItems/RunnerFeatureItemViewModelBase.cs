@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using CommunityToolkit.Mvvm.Input;
 using Gis.Tool.Apps.Desktop.Abstractions;
 using Gis.Tool.Apps.Desktop.Models;
+using Gis.Tool.Apps.Desktop.Views.FeatureItems;
 
 namespace Gis.Tool.Apps.Desktop.ViewModels.FeatureItems;
 
@@ -23,7 +24,23 @@ public abstract class RunnerFeatureItemViewModelBase(
     public Type UserControlType { get; } = userControlType;
 
     [field: AllowNull, MaybeNull]
-    public UserControl View
+    public Control View
+    {
+        get
+        {
+            if (field == null)
+            {
+                field = new RunnerFeatureItemWrapper()
+                {
+                    DataContext = this 
+                };
+            }
+            
+            return field;
+        }
+    }
+
+    public Control BussinesView
     {
         get
         {
