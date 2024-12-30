@@ -26,50 +26,6 @@ namespace Gis.Tool.Apps.Desktop
                     var services = new ServiceCollection();
                     services.AddLibs();
 
-                    var types = GetType().Assembly.GetTypes().ToArray();
-                    foreach (var type in types)
-                    {
-                        var attr = type.GetCustomAttribute<RegisterServiceAttribute>();
-                        var unAttr = type.GetCustomAttribute<UnRegisterServcieAttribute>();
-                        if(unAttr != null) continue;
-                        
-                        if (attr != null)
-                        {
-                            if (type.IsAbstract || !type.IsClass)
-                                continue;
-
-                            if (attr.ImplementationType == null)
-                            {
-                                _ = attr.Lifetime switch
-                                {
-                                    ServiceLifetime.Scoped => services.AddScoped(type),
-                                    ServiceLifetime.Singleton => services.AddSingleton(type),
-                                    ServiceLifetime.Transient => services.AddTransient(type),
-                                    _ => throw new ArgumentOutOfRangeException(),
-                                };
-                            }
-                            else
-                            {
-                                _ = attr.Lifetime switch
-                                {
-                                    ServiceLifetime.Scoped => services.AddScoped(
-                                        type,
-                                        attr.ImplementationType
-                                    ),
-                                    ServiceLifetime.Singleton => services.AddSingleton(
-                                        type,
-                                        attr.ImplementationType
-                                    ),
-                                    ServiceLifetime.Transient => services.AddTransient(
-                                        type,
-                                        attr.ImplementationType
-                                    ),
-                                    _ => throw new ArgumentOutOfRangeException(),
-                                };
-                            }
-                        }
-                    }
-
                     Log.Logger = new LoggerConfiguration()
                         .WriteTo.Async(c =>
                         {
@@ -99,15 +55,16 @@ namespace Gis.Tool.Apps.Desktop
             // 如果没有这一行，数据验证将会在 Avalonia 和 CommunityToolkit 中重复。
             BindingPlugins.DataValidators.RemoveAt(0);
 
-            var vm = ServiceProvider.GetRequiredService<MainWindowViewModel>();
+            // var vm = ServiceProvider.GetRequiredService<MainWindowViewModel>();
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 // Line below is needed to remove Avalonia data validation.
                 // Without this line you will get duplicate validations from both Avalonia and CT
                 BindingPlugins.DataValidators.RemoveAt(0);
+
+                var vm = new MainWindowViewModel();
                 desktop.MainWindow = new MainWindow { DataContext = vm };
-                LoadFeatureItems(vm);
 
                 desktop.Exit += (_, __) =>
                 {
@@ -116,27 +73,6 @@ namespace Gis.Tool.Apps.Desktop
             }
 
             base.OnFrameworkInitializationCompleted();
-        }
-
-        private void LoadFeatureItems(MainWindowViewModel vm)
-        {
-            var types = Assembly.GetExecutingAssembly().GetTypes().ToArray();
-            var baseType = typeof(FeatureItemViewModelBase);
-
-            foreach (var type in types)
-            {
-                if (!baseType.IsAssignableFrom(type) || type == baseType)
-                    continue;
-
-                if (
-                    ServiceProvider.GetRequiredService(type)
-                    is FeatureItemViewModelBase featureItemViewModel
-                )
-                {
-                    vm.FeatureLists.FirstOrDefault(x => x.Id == featureItemViewModel.PId)
-                        ?.FeatureItems.Add(featureItemViewModel);
-                }
-            }
         }
     }
 }

@@ -1,22 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using Gis.Tool.Apps.Desktop.Attributes;
 using Gis.Tool.Apps.Desktop.Messages;
 using Gis.Tool.Apps.Desktop.Views.FeatureItems;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Gis.Tool.Apps.Desktop.ViewModels;
 
-[RegisterService(ServiceLifetime.Singleton)]
 public partial class MainWindowViewModel : ViewModelBase
 {
-    private  static readonly UserControl _homePage = new HomePage();
+    private static readonly UserControl HomePage = new HomePage();
 
     public MainWindowViewModel()
     {
+        LoadFeatureItems();
+        
         WeakReferenceMessenger.Default.Register<MainWindowViewModel, SelectFeatureItemChangedMessage>(this,
             (r, m) => { r.SelectedFeatureItemControl = m.Value.Control; });
     }
@@ -49,7 +51,7 @@ public partial class MainWindowViewModel : ViewModelBase
         },
     ];
 
-    [ObservableProperty] public partial UserControl SelectedFeatureItemControl { get; set; } = _homePage;
+    [ObservableProperty] public partial UserControl SelectedFeatureItemControl { get; set; } = HomePage;
 
     [RelayCommand]
     private void ToggleSplitView()
@@ -60,7 +62,23 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void BackToHomePage()
     {
-        SelectedFeatureItemControl = _homePage;
+        SelectedFeatureItemControl = HomePage;
         FeatureLists.ForEach(x=>x.SelectedFeatureItem = null);
+    }
+    
+    private void LoadFeatureItems()
+    {
+        var types = Assembly.GetExecutingAssembly().GetTypes().ToArray();
+        var baseType = typeof(FeatureItemViewModelBase);
+
+        foreach (var type in types)
+        {
+            if (!baseType.IsAssignableFrom(type) || type == baseType)
+                continue;
+                
+            var featureItemViewModel =(Activator.CreateInstance(type) as FeatureItemViewModelBase)!;
+            FeatureLists.FirstOrDefault(x => x.Id == featureItemViewModel.PId)
+                ?.FeatureItems.Add(featureItemViewModel);
+        }
     }
 }

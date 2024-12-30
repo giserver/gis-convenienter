@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Gis.Tool.Apps.Desktop.ViewModels;
 
-[RegisterService(ServiceLifetime.Singleton)]
 public abstract class FeatureItemViewModelBase(
     string pId,
     string title,

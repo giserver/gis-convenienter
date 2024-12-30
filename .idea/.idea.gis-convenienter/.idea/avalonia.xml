@@ -10,6 +10,7 @@
         <entry key="src/Gis.Convenienter.Apps.Desktop/Views/TitleBar.axaml" value="src/Gis.Convenienter.Apps.Desktop/Gis.Convenienter.Apps.Desktop.csproj" />
         <entry key="src/Gis.Tool.Apps.Desktop/App.axaml" value="src/Gis.Tool.Apps.Desktop/Gis.Tool.Apps.Desktop.csproj" />
         <entry key="src/Gis.Tool.Apps.Desktop/Styles/Icons.axaml" value="src/Gis.Tool.Apps.Desktop/Gis.Tool.Apps.Desktop.csproj" />
+        <entry key="src/Gis.Tool.Apps.Desktop/Views/FeatureItems/FeatureTaskScheduler.axaml" value="src/Gis.Tool.Apps.Desktop/Gis.Tool.Apps.Desktop.csproj" />
         <entry key="src/Gis.Tool.Apps.Desktop/Views/FeatureItems/GeoJson/GeoJson.axaml" value="src/Gis.Tool.Apps.Desktop/Gis.Tool.Apps.Desktop.csproj" />
         <entry key="src/Gis.Tool.Apps.Desktop/Views/FeatureItems/GeoJson/GeoJsonToShp.axaml" value="src/Gis.Tool.Apps.Desktop/Gis.Tool.Apps.Desktop.csproj" />
         <entry key="src/Gis.Tool.Apps.Desktop/Views/FeatureItems/GeoTiff/GeoTiff2COG.axaml" value="src/Gis.Tool.Apps.Desktop/Gis.Tool.Apps.Desktop.csproj" />
