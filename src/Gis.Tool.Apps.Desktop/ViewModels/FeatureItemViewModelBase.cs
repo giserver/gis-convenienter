@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Avalonia.Controls;
+using CommunityToolkit.Mvvm.Input;
 using Gis.Tool.Apps.Desktop.Attributes;
+using Gis.Tool.Apps.Desktop.Models;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Gis.Tool.Apps.Desktop.ViewModels;
@@ -32,6 +37,17 @@ public abstract class FeatureItemViewModelBase(
             }
             
             return field;
+        }
+    }
+
+    protected abstract FeatureTaskItem CreateProcessTask();
+
+    [field: AllowNull, MaybeNull]
+    public ICommand RunCommand
+    {
+        get
+        {
+            return field ??= new RelayCommand(() => { });
         }
     }
 }
