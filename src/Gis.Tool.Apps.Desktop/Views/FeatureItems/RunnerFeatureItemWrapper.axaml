@@ -3,19 +3,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:Gis.Tool.Apps.Desktop.ViewModels.FeatureItems"
+             xmlns:md="https://github.com/whistyun/Markdown.Avalonia"
              x:DataType="vm:RunnerFeatureItemViewModelBase"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Gis.Tool.Apps.Desktop.Views.FeatureItems.RunnerFeatureItemWrapper">
     <Design.DataContext>
         <vm:RunnerFeatureItemViewModelBase></vm:RunnerFeatureItemViewModelBase>
     </Design.DataContext>
-    <StackPanel Margin="16">
-        <StackPanel Orientation="Horizontal" Margin="0 0 0 16">
-            <TextBlock FontSize="32" FontWeight="700" Text="{Binding Title}"></TextBlock>
-            <Button Margin="16 0 0 0 " VerticalAlignment="Bottom" Content="运行" Command="{Binding RunCommand}">
-            </Button>
+
+    <SplitView x:Name="CtrlSplitView" IsPaneOpen="False" DisplayMode="Overlay" PanePlacement="Right">
+        <StackPanel Margin="16">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 16">
+                <TextBlock FontSize="32" FontWeight="700" Text="{Binding Title}"></TextBlock>
+                <Button Margin="16 0 0 0 " VerticalAlignment="Bottom" Content="运行" Command="{Binding RunCommand}">
+                </Button>
+                <Button Margin="16 0 0 0 " VerticalAlignment="Bottom" Content="文档" Click="ToggleDocument_OnClick">
+                </Button>
+            </StackPanel>
+
+            <ContentControl Margin="16" Content="{Binding BusinessView}"></ContentControl>
         </StackPanel>
-        
-        <ContentControl Margin="16" Content="{Binding BusinessView}"></ContentControl>
-    </StackPanel>
+
+        <SplitView.Pane>
+            <StackPanel Margin="8">
+                <Grid ColumnDefinitions="* Auto" Margin="0 0 0 16">
+                    <TextBlock FontSize="16" FontWeight="600" Text="{Binding Title}"></TextBlock>
+                    <Button Padding="2 6" Background="Transparent" Grid.Column="1" Click="ToggleDocument_OnClick">
+                        <PathIcon Height="14" Data="{StaticResource Close}"></PathIcon>
+                    </Button>
+                </Grid>
+                
+                <md:MarkdownScrollViewer Markdown="{Binding Description}"></md:MarkdownScrollViewer>
+            </StackPanel>
+        </SplitView.Pane>
+    </SplitView>
+
 </UserControl>

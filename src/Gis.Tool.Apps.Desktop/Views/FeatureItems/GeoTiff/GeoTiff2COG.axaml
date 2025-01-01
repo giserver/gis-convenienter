@@ -41,7 +41,7 @@
         </ComboBox>
         
         <TextBlock Grid.Row="6" Grid.Column="0" Classes="label">压缩格式</TextBlock>
-        <ComboBox Grid.Row="6" Grid.Column="2" ItemsSource="{Binding COGCompressOptions}" SelectedValue="{Binding CogCompress}">
+        <ComboBox Grid.Row="6" Grid.Column="2" ItemsSource="{Binding CogCompressOptions}" SelectedValue="{Binding CogCompress}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}"></TextBlock>

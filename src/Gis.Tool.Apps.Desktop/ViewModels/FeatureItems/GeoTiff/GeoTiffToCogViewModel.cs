@@ -12,7 +12,11 @@ using Gis.Tool.Libs.Options;
 namespace Gis.Tool.Apps.Desktop.ViewModels.FeatureItems.GeoTiff;
 
 public partial class GeoTiffToCogViewModel()
-    : RunnerFeatureItemViewModelBase("0", "GeoTiff to Cog", "GeoTiff to Cog", typeof(GeoTiff2Cog))
+    : RunnerFeatureItemViewModelBase(
+        "0", 
+        "GeoTiff to Cog", 
+        "gdal关于cog文档 [链接](https://gdal.org/en/stable/drivers/raster/cog.html)", 
+        typeof(GeoTiff2Cog))
 {
     [ObservableProperty] public partial string DestPath { get; set; }
 
@@ -25,7 +29,7 @@ public partial class GeoTiffToCogViewModel()
     [ObservableProperty] public partial string CogCompress { get; set; } = COGCompress.WEBP.Name;
     
     [ObservableProperty]
-    public partial IReadOnlyList<string> COGCompressOptions { get; set; } = COGCompress.List.Select(x => x.Name).ToList();
+    public partial IReadOnlyList<string> CogCompressOptions { get; set; } = COGCompress.List.Select(x => x.Name).ToList();
 
     protected override FeatureTaskItem CreateProcessTask()
     {
