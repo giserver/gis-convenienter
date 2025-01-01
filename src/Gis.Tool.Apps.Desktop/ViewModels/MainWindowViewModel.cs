@@ -6,6 +6,7 @@ using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Gis.Tool.Apps.Desktop.Abstractions;
 using Gis.Tool.Apps.Desktop.Messages;
 using Gis.Tool.Apps.Desktop.ViewModels.FeatureItems;
 using Gis.Tool.Apps.Desktop.Views.FeatureItems;
@@ -81,9 +82,9 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void SelectedFixFeatureItemChange(FixFeatureItemViewModel value)
+    private void SelectedFixFeatureItemChange(IFeatureItem value)
     {
-        Console.WriteLine(value);
+        Console.WriteLine(value.Title);
     }
     
     private void LoadFeatureItems()

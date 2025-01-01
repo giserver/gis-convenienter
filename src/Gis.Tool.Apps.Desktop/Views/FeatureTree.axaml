@@ -8,6 +8,7 @@
              xmlns:converter="using:Gis.Tool.Apps.Desktop.Converters"
              x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d"
+             x:Name="CtrlFeatureTree"
              x:Class="Gis.Tool.Apps.Desktop.Views.FeatureTree">
 
     <Design.DataContext>
@@ -48,6 +49,11 @@
                        </Expander.Header>
                        <ListBox ItemsSource="{Binding FeatureItems}"
                                 SelectedItem="{Binding SelectedFeatureItem, Mode=TwoWay}">
+                           <i:Interaction.Behaviors>
+                               <ia:EventTriggerBehavior EventName="SelectionChanged">
+                                   <ia:InvokeCommandAction Command="{Binding #CtrlFeatureTree.((vm:MainWindowViewModel)DataContext).SelectedFixFeatureItemChangeCommand}" CommandParameter="{Binding SelectedFeatureItem}"></ia:InvokeCommandAction>
+                               </ia:EventTriggerBehavior>
+                           </i:Interaction.Behaviors>
                            <ListBox.ItemTemplate>
                                <DataTemplate>
                                    <Grid>
