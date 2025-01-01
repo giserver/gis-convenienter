@@ -12,19 +12,4 @@ public partial class RunnerFeatureItemWrapper : UserControl
     {
         InitializeComponent();
     }
-    
-    // public static readonly DirectProperty<RunnerFeatrueItemWrapper, RunnerFeatureItemViewModelBase> RunnerFeatureItemProperty =
-    //     AvaloniaProperty.RegisterDirect<RunnerFeatrueItemWrapper, RunnerFeatureItemViewModelBase>(
-    //         nameof(Thickness),
-    //         o => o.RunnerFeatureItem,
-    //         (o, v) => o.RunnerFeatureItem = v,
-    //         defaultBindingMode: BindingMode.OneWay);
-    //
-    // private RunnerFeatureItemViewModelBase runnerFeatureItem;
-    //
-    // public RunnerFeatureItemViewModelBase RunnerFeatureItem
-    // {
-    //     get => runnerFeatureItem;
-    //     set => SetAndRaise(RunnerFeatureItemProperty, ref runnerFeatureItem, value);
-    // }
 }

@@ -1,0 +1,16 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Name="CtrlOpenFilePicker"
+             x:Class="Gis.Tool.Apps.Desktop.Views.Components.OpenFilePicker">
+    <Grid ColumnDefinitions="* Auto">
+        <TextBox BorderThickness="0 0 0 2"
+                 Watermark="请选择文件" 
+                 IsReadOnly="True"
+                 TextWrapping="NoWrap" 
+                 Text="{Binding ElementName=CtrlOpenFilePicker, Path=FilePath}"></TextBox>
+        <Button Grid.Column="1" Margin="8 0 0 0" Click="PickFile_OnClick">...</Button>
+    </Grid>
+</UserControl>

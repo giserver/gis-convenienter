@@ -9,7 +9,13 @@
     <Design.DataContext>
         <vm:RunnerFeatureItemViewModelBase></vm:RunnerFeatureItemViewModelBase>
     </Design.DataContext>
-    <Grid>
-        <TextBlock Text="{Binding Title}"></TextBlock>
-    </Grid>
+    <StackPanel Margin="16">
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 16">
+            <TextBlock FontSize="32" FontWeight="700" Text="{Binding Title}"></TextBlock>
+            <Button Margin="16 0 0 0 " VerticalAlignment="Bottom" Content="运行" Command="{Binding RunCommand}">
+            </Button>
+        </StackPanel>
+        
+        <ContentControl Margin="16" Content="{Binding BusinessView}"></ContentControl>
+    </StackPanel>
 </UserControl>

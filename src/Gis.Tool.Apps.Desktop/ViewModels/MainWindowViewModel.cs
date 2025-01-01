@@ -33,8 +33,8 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty]
     public partial List<FixFeatureItemViewModel> FixFeatureItems { get; set; } = [
-        new ("主页", "", new HomePage()),
-        new ("运行", "", new FeatureTaskScheduler())
+        new ("主页", "", new HomePage(), "Home"),
+        new ("运行", "", new FeatureTaskScheduler(), "Run")
     ];
 
     [ObservableProperty]

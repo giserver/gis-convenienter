@@ -40,7 +40,8 @@ public abstract class RunnerFeatureItemViewModelBase(
         }
     }
 
-    public Control BussinesView
+    [field: AllowNull, MaybeNull]
+    public Control BusinessView
     {
         get
         {
@@ -62,7 +63,10 @@ public abstract class RunnerFeatureItemViewModelBase(
     {
         get
         {
-            return field ??= new RelayCommand(() => { });
+            return field ??= new RelayCommand(() =>
+            {
+                Console.WriteLine(this.GetType().Name);
+            });
         }
     }
 }

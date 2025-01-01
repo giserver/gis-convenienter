@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Gis.Tool.Apps.Desktop.Models;
@@ -16,9 +18,14 @@ public partial class GeoTiffToCogViewModel()
 
     [ObservableProperty] public partial string[] SrcPaths { get; set; }
 
-    [ObservableProperty] public partial int BlockSize { get; set; }
+    [ObservableProperty] public partial int BlockSize { get; set; } = 256;
+    
+    [ObservableProperty] public partial IReadOnlyList<int> BlockSizeOptions { get; set; } = [256,512];
 
-    [ObservableProperty] public partial COGCompress COGCompress { get; set; }
+    [ObservableProperty] public partial string CogCompress { get; set; } = COGCompress.WEBP.Name;
+    
+    [ObservableProperty]
+    public partial IReadOnlyList<string> COGCompressOptions { get; set; } = COGCompress.List.Select(x => x.Name).ToList();
 
     protected override FeatureTaskItem CreateProcessTask()
     {
@@ -28,7 +35,7 @@ public partial class GeoTiffToCogViewModel()
         return new FeatureTaskItem(GetRequiredService<IGdalWrapper>()
                 .ConvertGeoTiff2COGAsync(
                     new ConvertGeoTiff2COGOptions(Path.GetDirectoryName(DestPath), Path.GetFileName(DestPath), SrcPaths,
-                        "EPSG:3857", (uint)BlockSize, COGCompress),
+                        "EPSG:3857", (uint)BlockSize, COGCompress.FromName(CogCompress)),
                     progress,
                     cancellationToken.Token),
             cancellationToken, progress, this);
