@@ -3,7 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:Gis.Tool.Apps.Desktop.ViewModels"
-             xmlns:view="using:Gis.Tool.Apps.Desktop.Views"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:converter="using:Gis.Tool.Apps.Desktop.Converters"
              x:DataType="vm:MainWindowViewModel"
              mc:Ignorable="d"
@@ -19,6 +20,11 @@
     
    <StackPanel>
        <ListBox ItemsSource="{Binding FixFeatureItems}" SelectedItem="{Binding SelectedFixFeatureItem}">
+           <i:Interaction.Behaviors>
+               <ia:EventTriggerBehavior EventName="SelectionChanged">
+                   <ia:InvokeCommandAction Command="{Binding SelectedFixFeatureItemChangeCommand}" CommandParameter="{Binding SelectedFixFeatureItem}"></ia:InvokeCommandAction>
+               </ia:EventTriggerBehavior>
+           </i:Interaction.Behaviors>
            <ListBox.ItemTemplate>
                <DataTemplate>
                    <Grid ColumnDefinitions="Auto *" Margin="4 0 0 0">

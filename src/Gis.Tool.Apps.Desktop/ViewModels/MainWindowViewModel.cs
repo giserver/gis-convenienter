@@ -79,6 +79,12 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         SplitViewOpen = !SplitViewOpen;
     }
+
+    [RelayCommand]
+    private void SelectedFixFeatureItemChange(FixFeatureItemViewModel value)
+    {
+        Console.WriteLine(value);
+    }
     
     private void LoadFeatureItems()
     {
