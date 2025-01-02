@@ -30,17 +30,13 @@ public partial class MainWindowViewModel : ViewModelBase
                     SelectedFixFeatureItem = null;
             });
     }
-
-    [ObservableProperty] public partial bool SplitViewOpen { get; set; } = true;
-
-    [ObservableProperty]
-    public partial List<FixFeatureItemViewModel> FixFeatureItems { get; set; } = [
+    
+    public List<FixFeatureItemViewModel> FixFeatureItems { get; set; } = [
         new ("主页", "", new HomePage(), "Home"),
         new ("运行", "", new FeatureTaskScheduler(), "Run")
     ];
 
-    [ObservableProperty]
-    public partial List<FeatureListViewModel> FeatureLists { get; set; } =
+    public List<FeatureListViewModel> FeatureLists { get; set; } =
     [
         new()
         {
@@ -72,7 +68,6 @@ public partial class MainWindowViewModel : ViewModelBase
             Icon = "FeatureListPlugin",
         },
     ];
-
    
     [ObservableProperty] public partial Control SelectedFeatureItemControl { get; set; }
     
@@ -83,6 +78,8 @@ public partial class MainWindowViewModel : ViewModelBase
         if(SelectedFixFeatureItem != null)
             WeakReferenceMessenger.Default.Send(new SelectFeatureItemChangedMessage(SelectedFixFeatureItem));
     }
+    
+    [ObservableProperty] public partial bool SplitViewOpen { get; set; } = true;
 
     [RelayCommand]
     private void ToggleSplitView()
