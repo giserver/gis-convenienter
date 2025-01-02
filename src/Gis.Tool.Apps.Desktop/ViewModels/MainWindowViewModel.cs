@@ -9,6 +9,8 @@ using CommunityToolkit.Mvvm.Messaging;
 using Gis.Tool.Apps.Desktop.Abstractions;
 using Gis.Tool.Apps.Desktop.Messages;
 using Gis.Tool.Apps.Desktop.ViewModels.FeatureItems;
+using Gis.Tool.Apps.Desktop.ViewModels.FeatureItems.GeoJson;
+using Gis.Tool.Apps.Desktop.ViewModels.FeatureItems.GeoTiff;
 using Gis.Tool.Apps.Desktop.Views.FeatureItems;
 
 namespace Gis.Tool.Apps.Desktop.ViewModels;
@@ -17,8 +19,6 @@ public partial class MainWindowViewModel : ViewModelBase
 {
     public MainWindowViewModel()
     {
-        LoadFeatureItems();
-
         SelectedFixFeatureItem = FixFeatureItems[0];
         SelectedFeatureItemControl = FixFeatureItems[0].View;
         
@@ -48,6 +48,10 @@ public partial class MainWindowViewModel : ViewModelBase
             Title = "GeoTiff",
             Description = "GeoTiff 数据处理",
             Icon = "FeatureListGeoTiff",
+            FeatureItems =
+            {
+                new GeoTiffToCogViewModel()
+            }
         },
         new()
         {
@@ -55,6 +59,10 @@ public partial class MainWindowViewModel : ViewModelBase
             Title = "GeoJson",
             Description = "",
             Icon = "FeatureListGeoJson",
+            FeatureItems =
+            {
+                new GeoJsonToShpViewModel()
+            }
         },
         new()
         {
@@ -80,21 +88,5 @@ public partial class MainWindowViewModel : ViewModelBase
     private void ToggleSplitView()
     {
         SplitViewOpen = !SplitViewOpen;
-    }
-    
-    private void LoadFeatureItems()
-    {
-        var types = Assembly.GetExecutingAssembly().GetTypes().ToArray();
-        var baseType = typeof(RunnerFeatureItemViewModelBase);
-
-        foreach (var type in types)
-        {
-            if (!baseType.IsAssignableFrom(type) || type == baseType)
-                continue;
-                
-            var featureItemViewModel =(Activator.CreateInstance(type) as RunnerFeatureItemViewModelBase)!;
-            FeatureLists.FirstOrDefault(x => x.Id == featureItemViewModel.PId)
-                ?.FeatureItems.Add(featureItemViewModel);
-        }
     }
 }

@@ -11,42 +11,46 @@
     <Design.DataContext>
         <vm:GeoTiffToCogViewModel></vm:GeoTiffToCogViewModel>
     </Design.DataContext>
-    
+
     <UserControl.Resources>
         <contracts:StorageModalOptions x:Key="StorageModalOptions" />
     </UserControl.Resources>
-    
+
     <UserControl.Styles>
         <Style Selector="TextBlock.label">
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
         </Style>
     </UserControl.Styles>
-    
+
     <Grid ColumnDefinitions="auto,16, *" RowDefinitions="auto,16,auto,16,auto,16,auto">
-        <TextBlock Grid.Row="0" Grid.Column="0" Classes="label" >源文件</TextBlock>
-        <components:OpenFilePicker Grid.Row="0" Grid.Column="2" FilePath="{Binding DestPath}" 
-                                   FilePickerOptions="{Binding Source ={StaticResource StorageModalOptions},Path=GeoTiffPickerOpenOptions}"></components:OpenFilePicker>
-        
+        <TextBlock Grid.Row="0" Grid.Column="0" Classes="label">源文件</TextBlock>
+        <components:OpenFilePicker Grid.Row="0" Grid.Column="2" FilePath="{Binding SrcPath}"
+                                   FilePickerOptions="{Binding Source ={StaticResource StorageModalOptions},Path=GeoTiffPickerOpenOptions}">
+        </components:OpenFilePicker>
+
         <TextBlock Grid.Row="2" Grid.Column="0" Classes="label">保存至</TextBlock>
         <components:SaveFilePicker Grid.Row="2" Grid.Column="2" FilePath="{Binding DestPath}"
-                                   FilePickerOptions="{Binding Source ={StaticResource StorageModalOptions},Path=GeoTiffPickerSaveOptions}"></components:SaveFilePicker>
-        
+                                   FilePickerOptions="{Binding Source ={StaticResource StorageModalOptions},Path=GeoTiffPickerSaveOptions}">
+        </components:SaveFilePicker>
+
         <TextBlock Grid.Row="4" Grid.Column="0" Classes="label">切片大小</TextBlock>
-        <ComboBox Grid.Row="4" Grid.Column="2" ItemsSource="{Binding BlockSizeOptions}" SelectedValue="{Binding BlockSize}">
-           <ComboBox.ItemTemplate>
-               <DataTemplate>
-                   <TextBlock Text="{Binding}"></TextBlock>
-               </DataTemplate>
-           </ComboBox.ItemTemplate>
-        </ComboBox>
-        
-        <TextBlock Grid.Row="6" Grid.Column="0" Classes="label">压缩格式</TextBlock>
-        <ComboBox Grid.Row="6" Grid.Column="2" ItemsSource="{Binding CogCompressOptions}" SelectedValue="{Binding CogCompress}">
+        <ComboBox Grid.Row="4" Grid.Column="2" ItemsSource="{Binding BlockSizeOptions}"
+                  SelectedValue="{Binding BlockSize}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}"></TextBlock>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-       </Grid>
+
+        <TextBlock Grid.Row="6" Grid.Column="0" Classes="label">压缩格式</TextBlock>
+        <ComboBox Grid.Row="6" Grid.Column="2" ItemsSource="{Binding CogCompressOptions}"
+                  SelectedValue="{Binding CogCompress}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"></TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </Grid>
 </UserControl>

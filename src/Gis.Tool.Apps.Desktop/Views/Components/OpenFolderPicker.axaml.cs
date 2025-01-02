@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
 
 namespace Gis.Tool.Apps.Desktop.Views.Components;
@@ -19,7 +19,8 @@ public partial class OpenFolderPicker : UserControl
         (
             nameof(FolderPath),
             o => o.FolderPath,
-            (o, v) => o.FolderPath = v
+            (o, v) => o.FolderPath = v,
+            defaultBindingMode: BindingMode.TwoWay
         );
 
     public string FolderPath

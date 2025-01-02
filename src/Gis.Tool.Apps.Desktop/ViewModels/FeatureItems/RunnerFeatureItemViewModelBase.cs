@@ -21,7 +21,6 @@ public abstract class RunnerFeatureItemViewModelBase(
     public string Title { get; } = title;
 
     public string Description { get; } = description;
-    public Type UserControlType { get; } = userControlType;
 
     [field: AllowNull, MaybeNull]
     public Control View
@@ -47,9 +46,9 @@ public abstract class RunnerFeatureItemViewModelBase(
         {
             if (field == null)
             {
-                if (!typeof(UserControl).IsAssignableFrom(UserControlType))
-                    throw new ArgumentException(nameof(UserControlType));
-                field = (Activator.CreateInstance(UserControlType) as UserControl)!;
+                if (!typeof(UserControl).IsAssignableFrom(userControlType))
+                    throw new ArgumentException(nameof(userControlType));
+                field = (Activator.CreateInstance(userControlType) as UserControl)!;
             }
             
             return field;
@@ -65,7 +64,7 @@ public abstract class RunnerFeatureItemViewModelBase(
         {
             return field ??= new RelayCommand(() =>
             {
-                Console.WriteLine(this.GetType().Name);
+                Console.WriteLine(this);
             });
         }
     }

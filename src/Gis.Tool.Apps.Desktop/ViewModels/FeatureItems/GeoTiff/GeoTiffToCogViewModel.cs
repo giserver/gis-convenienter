@@ -20,7 +20,7 @@ public partial class GeoTiffToCogViewModel()
 {
     [ObservableProperty] public partial string DestPath { get; set; }
 
-    [ObservableProperty] public partial string[] SrcPaths { get; set; }
+    [ObservableProperty] public partial string SrcPath { get; set; }
 
     [ObservableProperty] public partial int BlockSize { get; set; } = 256;
     
@@ -38,7 +38,7 @@ public partial class GeoTiffToCogViewModel()
 
         return new FeatureTaskItem(GetRequiredService<IGdalWrapper>()
                 .ConvertGeoTiff2COGAsync(
-                    new ConvertGeoTiff2COGOptions(Path.GetDirectoryName(DestPath), Path.GetFileName(DestPath), SrcPaths,
+                    new ConvertGeoTiff2COGOptions(Path.GetDirectoryName(DestPath), Path.GetFileName(DestPath), [SrcPath],
                         "EPSG:3857", (uint)BlockSize, COGCompress.FromName(CogCompress)),
                     progress,
                     cancellationToken.Token),

@@ -1,9 +1,8 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
 
 namespace Gis.Tool.Apps.Desktop.Views.Components;
@@ -20,7 +19,8 @@ public partial class OpenFilePicker : UserControl
         (
             nameof(FilePath),
             o => o.FilePath,
-            (o, v) => o.FilePath = v
+            (o, v) => o.FilePath = v,
+             defaultBindingMode: BindingMode.TwoWay
         );
 
     public string FilePath
