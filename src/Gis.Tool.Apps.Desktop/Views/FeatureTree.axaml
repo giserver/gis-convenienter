@@ -21,11 +21,6 @@
     
    <StackPanel>
        <ListBox ItemsSource="{Binding FixFeatureItems}" SelectedItem="{Binding SelectedFixFeatureItem}">
-           <i:Interaction.Behaviors>
-               <ia:EventTriggerBehavior EventName="SelectionChanged">
-                   <ia:InvokeCommandAction Command="{Binding SelectedFixFeatureItemChangeCommand}" CommandParameter="{Binding SelectedFixFeatureItem}"></ia:InvokeCommandAction>
-               </ia:EventTriggerBehavior>
-           </i:Interaction.Behaviors>
            <ListBox.ItemTemplate>
                <DataTemplate>
                    <Grid ColumnDefinitions="Auto *" Margin="4 0 0 0">
@@ -49,11 +44,6 @@
                        </Expander.Header>
                        <ListBox ItemsSource="{Binding FeatureItems}"
                                 SelectedItem="{Binding SelectedFeatureItem, Mode=TwoWay}">
-                           <i:Interaction.Behaviors>
-                               <ia:EventTriggerBehavior EventName="SelectionChanged">
-                                   <ia:InvokeCommandAction Command="{Binding #CtrlFeatureTree.((vm:MainWindowViewModel)DataContext).SelectedFixFeatureItemChangeCommand}" CommandParameter="{Binding SelectedFeatureItem}"></ia:InvokeCommandAction>
-                               </ia:EventTriggerBehavior>
-                           </i:Interaction.Behaviors>
                            <ListBox.ItemTemplate>
                                <DataTemplate>
                                    <Grid>

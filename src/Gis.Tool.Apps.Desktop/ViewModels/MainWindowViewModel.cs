@@ -19,6 +19,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         LoadFeatureItems();
 
+        SelectedFixFeatureItem = FixFeatureItems[0];
         SelectedFeatureItemControl = FixFeatureItems[0].View;
         
         WeakReferenceMessenger.Default.Register<MainWindowViewModel, SelectFeatureItemChangedMessage>(this,
@@ -79,12 +80,6 @@ public partial class MainWindowViewModel : ViewModelBase
     private void ToggleSplitView()
     {
         SplitViewOpen = !SplitViewOpen;
-    }
-
-    [RelayCommand]
-    private void SelectedFixFeatureItemChange(IFeatureItem value)
-    {
-        Console.WriteLine(value.Title);
     }
     
     private void LoadFeatureItems()
